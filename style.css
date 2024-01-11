@@ -1,0 +1,74 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+}
+
+header {
+    background-color: black;
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.setup {
+    background-color: black;
+    color: white;
+    padding: 40px 10px;
+    margin: 0 auto;
+}
+
+.start, .back, .new-game, .gameOver {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.active-container {
+    text-align: center;
+    background-color: rgb(8, 1, 37);
+    padding: 10px;
+    color: greenyellow;
+    margin: auto;
+}
+
+.score {
+    background-color: rgb(8, 1, 37);
+    color: white;
+    display: flex;
+    padding: 40px;
+    justify-content: space-around;
+}
+
+.player {
+    font-size: 30px;
+}
+
+.player1 {
+    color: red;
+}
+
+.player2 {
+    color: greenyellow;
+}
+
+.player3 {
+    color: aqua;
+}
+
+.player4 {
+    color: pink;
+}
+
+.new-game-container {
+    background-color: rgb(8, 1, 37);
+    padding: 20px;
+}
+
+.add-score-container {
+    visibility: hidden;
+}
