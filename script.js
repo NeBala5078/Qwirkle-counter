@@ -1,7 +1,7 @@
 //initial state
 document.querySelector('.js-active-player').innerHTML = null;
-let players = { 1 : 0, 2 : 0, 3 : 0, 4:0 };
-let score = { 1 : 0, 2 : 0, 3 : 0, 4:0 };
+let players = { 0 : 0, 1 : 0, 2 : 0, 3:0 };
+let score = { 0 : 0, 1 : 0, 2 : 0, 3:0 };
 let playerCounter = 0;
 let playersInGame = 0;
 let lastScore = 0;
@@ -14,72 +14,24 @@ function addPlayer () {
     playersInGame = playerCounter;
     playerCounter++;
     document.querySelector('#player').value = null;
-    renderScore();}
+    renderPlayerTemplate();}
     else {
        alert('Maximum 4 játékos játszhatja a játékot'); 
     }
 }
 
-function renderScore () {
-    switch (playersInGame) {
-        
-        case 0:
-            document.querySelector('.js-score').innerHTML = `
-                <div class="player player1 js-player1">
-                    <h3>${players[0]}</h3>
-                    <p>${score[0]}</p>
-                </div>`
-                break;
-            
-        case 1:
-            document.querySelector('.js-score').innerHTML = `
-        <div class="player player1 js-player1">
-            <h3>${players[0]}</h3>
-            <p>${score[0]}</p>
-        </div>
-        <div class="player player2 js-player2">
-        <h3>${players[1]}</h3>
-        <p>${score[1]}</p>
-        </div>`
-        break;
+function renderPlayerTemplate () {
+    let playerTemplate = '';
+    for(let i = 0; i<=playersInGame; i++) {
+        playerTemplate += `
+        <div class="player player${i+1} js-player${i+1}">
+            <h3>${players[i]}</h3>
+            <p>${score[i]}</p>
+        </div>`;}
+        document.querySelector('.js-score').innerHTML = playerTemplate;    
+    }
+    
 
-        case 2:
-            document.querySelector('.js-score').innerHTML = `
-        <div class="player player1 js-player1">
-            <h3>${players[0]}</h3>
-            <p>${score[0]}</p>
-        </div>
-        <div class="player player2 js-player2">
-        <h3>${players[1]}</h3>
-        <p>${score[1]}</p>
-        </div>
-        <div class="player player3 js-player3">
-        <h3>${players[2]}</h3>
-        <p>${score[2]}</p>
-        </div>`
-        break;
-
-        case 3:
-document.querySelector('.js-score').innerHTML = `
-<div class="player player1 js-player1">
-            <h3>${players[0]}</h3>
-            <p>${score[0]}</p>
-        </div>
-        <div class="player player2 js-player2">
-        <h3>${players[1]}</h3>
-        <p>${score[1]}</p>
-        </div>
-        <div class="player player3 js-player3">
-        <h3>${players[2]}</h3>
-        <p>${score[2]}</p>
-        </div>
-        <div class="player player4 js-player4">
-        <h3>${players[3]}</h3>
-        <p>${score[3]}</p>
-        </div>   
-`;
-        break;
-}}
 
 function start() {
     document.querySelector('.js-setup').style.visibility = "hidden";
@@ -100,12 +52,13 @@ function renderActivePlayer() {
 function addScore() {
     lastScore = Number(document.querySelector('.js-new-score').value);
     score[playerCounter] += lastScore;
-    renderScore();
+    renderPlayerTemplate();
     document.querySelector('.js-new-score').value = 0;
     playerCounter < playersInGame ? playerCounter++ : playerCounter=0;
     renderActivePlayer();
-    return lastScore, undoable = true;;
+    return lastScore, undoable = true;
     }
+
 
 function gameOver() {
     let winner = '';
@@ -134,7 +87,7 @@ function undo() {
     if (undoable) {
     playerCounter != 0 ? playerCounter--  : playerCounter = playersInGame;
     score[playerCounter] -= lastScore;
-    renderScore();
+    renderPlayerTemplate();
     renderActivePlayer();
     return undoable = false;}
     else {
